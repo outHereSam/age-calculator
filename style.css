@@ -30,6 +30,17 @@ body {
   padding: 0 24px;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
 h1 {
   font-size: 42px;
   font-style: italic;
@@ -71,6 +82,7 @@ h1 {
 }
 
 .inputs label {
+  display: block;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 700;
@@ -98,14 +110,6 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: -30px;
-  left: 40%;
-}
-
-.separator .calculate svg {
-  width: 24px;
-  height: 24px;
 }
 
 .results {
@@ -114,4 +118,49 @@ h1 {
 
 .result {
   color: var(--primary-purple);
+}
+
+@media only screen and (max-width: 500px) {
+  .separator .calculate svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .separator .calculate {
+    position: absolute;
+    top: -30px;
+    left: 40%;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  h1 {
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .calculator-card {
+    width: 670px;
+    padding: 50px 46px;
+    border-bottom-right-radius: 128px;
+  }
+
+  .inputs input {
+    width: 130px;
+    font-size: 32px;
+  }
+
+  .separator .calculate {
+    width: 76px;
+    height: 76px;
+    position: absolute;
+    top: -40px;
+    right: 0;
+  }
+
+  .separator .calculate svg {
+    width: 42px;
+    height: 42px;
+  }
 }
