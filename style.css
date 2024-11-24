@@ -93,9 +93,11 @@ h1 {
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 700;
-  color: var(--smokey-grey);
+  /* color: var(--smokey-grey); */
   letter-spacing: 3px;
 }
+
+/* errors */
 
 .valid {
   border: solid 1px var(--light-grey);
@@ -103,6 +105,14 @@ h1 {
 
 .invalid {
   border: solid 1px var(--error-red);
+}
+
+.valid-label {
+  color: var(--smokey-grey);
+}
+
+.invalid-label {
+  color: var(--error-red);
 }
 
 .error-message {

@@ -6,6 +6,10 @@ const dayErr = document.getElementById("dayErr");
 const monthErr = document.getElementById("monthErr");
 const yearErr = document.getElementById("yearErr");
 
+const dayLabel = document.querySelector(".dayLabel");
+const monthLabel = document.querySelector(".monthLabel");
+const yearLabel = document.querySelector(".yearLabel");
+
 const calculateBtn = document.querySelector(".calculate");
 
 calculateBtn.addEventListener("click", () => {
@@ -13,57 +17,70 @@ calculateBtn.addEventListener("click", () => {
 });
 
 // Validate fields
+const isEmpty = (input) => {
+  return !input.value;
+};
+
+const showError = (input, errSpan, label, errMessage) => {
+  errSpan.textContent = errMessage;
+  label.classList.remove("valid-label");
+  label.classList.add("invalid-label");
+  input.classList.remove("valid");
+  input.classList.add("invalid");
+};
+
+const isValidDay = (input) => {
+  return !(
+    Number(input.value) < Number(input.min) ||
+    Number(input.value) > Number(input.max)
+  );
+};
+
+const isValidMonth = (input) => {
+  return !(
+    Number(input.value) < Number(input.min) ||
+    Number(input.value) > Number(input.max)
+  );
+};
+
+const isValidYear = (input) => {
+  return !(Number(input.value) > new Date().getFullYear());
+};
+
+resetError = (input, errSpan, label) => {
+  errSpan.textContent = "";
+  label.classList.remove("invalid-label");
+  label.classList.add("valid-label");
+  input.classList.remove("invalid");
+  input.classList.add("valid");
+};
 
 dayInput.addEventListener("input", () => {
-  if (!dayInput.value) {
-    dayErr.textContent = "This field is required";
-    dayInput.classList.remove("valid");
-    dayInput.classList.add("invalid");
-  } else if (
-    Number(dayInput.value) < Number(dayInput.min) ||
-    Number(dayInput.value) > Number(dayInput.max)
-  ) {
-    dayErr.textContent = "Must be a valid day";
-    dayInput.classList.remove("valid");
-    dayInput.classList.add("invalid");
+  if (isEmpty(dayInput)) {
+    showError(dayInput, dayErr, dayLabel, "This field is required");
+  } else if (!isValidDay(dayInput)) {
+    showError(dayInput, dayErr, dayLabel, "Must be a valid day");
   } else {
-    dayErr.textContent = "";
-    dayInput.classList.remove("invalid");
-    dayInput.classList.add("valid");
+    resetError(dayInput, dayErr, dayLabel);
   }
 });
 
 monthInput.addEventListener("input", () => {
-  if (!monthInput.value) {
-    monthErr.textContent = "This field is required";
-    monthInput.classList.remove("valid");
-    monthInput.classList.add("invalid");
-  } else if (
-    Number(monthInput.value) < Number(monthInput.min) ||
-    Number(monthInput.value) > Number(monthInput.max)
-  ) {
-    monthErr.textContent = "Must be a valid month";
-    monthInput.classList.remove("valid");
-    monthInput.classList.add("invalid");
+  if (isEmpty(monthInput)) {
+    showError(monthInput, monthErr, monthLabel, "This field is required");
+  } else if (!isValidMonth(monthInput)) {
+    showError(monthInput, monthErr, monthLabel, "Must be a valid month");
   } else {
-    monthErr.textContent = "";
-    monthInput.classList.remove("invalid");
-    monthInput.classList.add("valid");
+    resetError(monthInput, monthErr, monthLabel);
   }
 });
 
 yearInput.addEventListener("input", () => {
-  if (!yearInput.value) {
-    yearErr.textContent = "This field is required";
-    yearInput.classList.remove("valid");
-    yearInput.classList.add("invalid");
-  } else if (Number(yearInput.value) > new Date().getFullYear()) {
-    yearErr.textContent = "Must be a valid year";
-    yearInput.classList.remove("valid");
-    yearInput.classList.add("invalid");
+  if (isEmpty(yearInput)) {
+    showError(yearInput, yearErr, yearLabel, "This field is required");
+  } else if (!isValidYear(yearInput)) {
+    showError(yearInput, yearErr, yearLabel, "Must be in the past");
   } else {
-    yearErr.textContent = "";
-    yearInput.classList.remove("invalid");
-    yearInput.classList.add("valid");
+    resetError(yearInput, yearErr, yearLabel);
   }
 });
