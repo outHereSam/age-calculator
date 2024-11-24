@@ -10,10 +10,47 @@ const dayLabel = document.querySelector(".dayLabel");
 const monthLabel = document.querySelector(".monthLabel");
 const yearLabel = document.querySelector(".yearLabel");
 
+const yearResult = document.querySelector(".year-result");
+const monthResult = document.querySelector(".month-result");
+const dayResult = document.querySelector(".day-result");
+
 const calculateBtn = document.querySelector(".calculate");
+
+const ageCalculator = (day, month, year) => {
+  const birthday = new Date(`${month}/${day}/${year}`);
+  const now = new Date();
+
+  let years = now.getFullYear() - birthday.getFullYear();
+  let months = now.getMonth() - birthday.getMonth();
+  let days = now.getDate() - birthday.getDate();
+
+  // Adjust for negative months or days
+  if (days < 0) {
+    months--;
+    // Get days in previous month
+    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  return { years, months, days };
+};
 
 calculateBtn.addEventListener("click", () => {
   //   calculate age
+  const { years, months, days } = ageCalculator(
+    dayInput.value,
+    monthInput.value,
+    yearInput.value
+  );
+
+  yearResult.textContent = years;
+  monthResult.textContent = months;
+  dayResult.textContent = days;
 });
 
 // Validate fields
