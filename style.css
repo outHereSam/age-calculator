@@ -59,19 +59,24 @@ h1 {
 
 .inputs {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
   margin: 0 0 60px 0;
 }
 
+.inputs div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .inputs input {
-  width: 80px;
-  border: solid 1px var(--light-grey);
+  /* width: 80px; */
+  width: 100%;
   padding: 12px 0 12px 15px;
   border-radius: 4px;
   font-size: 18px;
   font-weight: 700;
-  margin: 8px 0 0 0;
   caret-color: var(--primary-purple);
 }
 
@@ -90,6 +95,23 @@ h1 {
   font-weight: 700;
   color: var(--smokey-grey);
   letter-spacing: 3px;
+}
+
+.valid {
+  border: solid 1px var(--light-grey);
+}
+
+.invalid {
+  border: solid 1px var(--error-red);
+}
+
+.error-message {
+  font-size: 10px;
+  color: var(--error-red);
+}
+
+.error-input {
+  border-color: var(--error-red);
 }
 
 .separator {
