@@ -42,8 +42,10 @@ input[type="number"] {
 }
 
 h1 {
-  font-size: 42px;
+  font-size: 46px;
   font-style: italic;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .calculator-card {
@@ -110,6 +112,11 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+
+.separator .calculate:hover {
+  background-color: var(--off-black);
 }
 
 .results {
@@ -136,8 +143,6 @@ h1 {
 @media only screen and (min-width: 500px) {
   h1 {
     font-size: 72px;
-    font-weight: 800;
-    line-height: 1;
   }
 
   .calculator-card {
